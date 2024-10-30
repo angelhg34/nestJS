@@ -1,3 +1,4 @@
+import { timeStamp } from "console"
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm"
 
 
@@ -22,7 +23,9 @@ export class Bootcamp {
     @Column('double')
     averageRaiting: number
 
-    @Column('date')
+    @Column({type:"timestamp", name:'create_at',
+            default:()=>'CURRENT_TIMESTAMP'
+    })
     createAt:Date
 
 }

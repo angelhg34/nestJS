@@ -5,14 +5,14 @@ export class Review {
     @PrimaryGeneratedColumn()
     id:number
 
-    @Column('varchar', {length: 50})
+    @Column({type:"varchar",length: 50, nullable:true})
     title:string
 
-    @Column('varchar', {length: 50})
+    @Column({type:"varchar",length:50,nullable:true})
     comment:string
 
-    @Column('int')
-    raiting:string
+    @Column({type:"int"})
+    raiting:number
 
 
 

@@ -10,7 +10,7 @@ export class BootcampsController {
   @Post()
   create(@Body() payload:any) {
     //payload: body de la request - create - update
-    return payload;
+    return this.bootcampsService.create(payload);
   }
 
   @Get()
@@ -25,10 +25,7 @@ export class BootcampsController {
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() payload) {
-    return {
-      id,
-      payload
-    };
+    return this.bootcampsService.update(+id,payload)
   }
 
   @Delete(':id')

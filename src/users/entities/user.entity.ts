@@ -6,20 +6,26 @@ export class User {
     @PrimaryGeneratedColumn()
     id:number
 
-    @Column('varchar', {length: 50})
+    @Column({type:"varchar",length: 50})
     name:string
 
-    @Column('varchar', {length: 50})
+    @Column({type:"varchar",length: 50})
     email:string
 
-    @Column('varchar', {length: 50})
-    role:string
+    @Column({name:'role'
+        ,type:"enum",
+        enum:[ 'Admin',
+            'Usuario',
+            'Editor']})
+    role:roles
 
-    @Column('varchar', {length: 50})
+
+    @Column({type:"varchar",length: 50})
     password:string
-
-
-
-
-
 }
+enum roles{
+    'Admin',
+    'Usuario',
+    'Editor'
+}
+

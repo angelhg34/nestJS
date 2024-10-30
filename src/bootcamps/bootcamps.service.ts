@@ -13,8 +13,11 @@ export class BootcampsService {
     private bootcampRepository: Repository<Bootcamp>){
 
   }
-  create(createBootcampDto: CreateBootcampDto) {
-    return 'This action adds a new bootcamp';
+  create(payload: any) {
+    //1. crear una instancia de una entity bootcamp
+    //2. grabar esa instancia y retornar 
+    const newBootcamp=this.bootcampRepository.create(payload);
+    return this.bootcampRepository.save(newBootcamp)
   }
 
   findAll() {
@@ -25,11 +28,17 @@ export class BootcampsService {
     return this.bootcampRepository.findOneBy({id});
   }
 
-  update(id: number, updateBootcampDto: UpdateBootcampDto) {
-    return `This action updates a #${id} bootcamp`;
+  async update(id: number, payload: any) {
+    //Encontrar bootcampo por id
+    //Hacer cambios por update: agregar cambios del payload a la entidad hallada en el punto 1
+    const updBootcamp= await this.bootcampRepository.findOneBy({id});
+    this.bootcampRepository.merge(updBootcamp,payload)
+    return this.bootcampRepository.save(updBootcamp)
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} bootcamp`;
+  async remove(id: number) {
+    const delBootcamp= await this.bootcampRepository.findOneBy({id});
+    this.bootcampRepository.delete(delBootcamp)
+    return delBootcamp
   }
 }

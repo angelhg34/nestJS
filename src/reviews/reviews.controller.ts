@@ -8,8 +8,8 @@ export class ReviewsController {
   constructor(private readonly reviewsService: ReviewsService) {}
 
   @Post()
-  create(@Body() createReviewDto: CreateReviewDto) {
-    return this.reviewsService.create(createReviewDto);
+  create(@Body() payload: any) {
+    return this.reviewsService.create(payload);
   }
 
   @Get()
@@ -23,8 +23,8 @@ export class ReviewsController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateReviewDto: UpdateReviewDto) {
-    return this.reviewsService.update(+id, updateReviewDto);
+  update(@Param('id') id: string, @Body() payload) {
+    return this.reviewsService.update(+id,payload)
   }
 
   @Delete(':id')

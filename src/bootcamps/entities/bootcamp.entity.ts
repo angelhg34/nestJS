@@ -1,5 +1,8 @@
 import { timeStamp } from "console"
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm"
+import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm"
+import { Course } from "src/courses/entities/course.entity"
+import { Review } from "src/reviews/entities/review.entity"
+import { User } from "src/users/entities/user.entity"
 
 
 @Entity('bootcamps')
@@ -28,4 +31,12 @@ export class Bootcamp {
     })
     createAt:Date
 
+    @OneToMany(()=>Course,(course)=>course.bootcamp)
+    courses: Course[]
+
+    @OneToMany(()=>Review,(review)=>review.bootcamp)
+    review:Review[]
+
+    @ManyToOne(()=>User,(User)=>User.bootcamp)
+    user:User
 }

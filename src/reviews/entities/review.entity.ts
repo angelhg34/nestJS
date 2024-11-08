@@ -1,4 +1,6 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm'
+import { Bootcamp } from 'src/bootcamps/entities/bootcamp.entity';
+import { User } from 'src/users/entities/user.entity';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm'
 
 @Entity('reviews')
 export class Review {
@@ -14,7 +16,11 @@ export class Review {
     @Column({type:"int"})
     raiting:number
 
+    @ManyToOne(()=>Bootcamp,(Bootcamp)=>Bootcamp.review)
+    bootcamp:Bootcamp
 
+    @ManyToOne(()=>User,(User)=>User.review)
+    users:User
 
 
 }

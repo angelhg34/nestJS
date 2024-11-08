@@ -9,13 +9,13 @@ import { Course } from './entities/course.entity';
 @Injectable()
 export class CoursesService {
 
-  constructor(@InjectRepository(Course)
+  constructor(@InjectRepository(Course)   
     private courseRepository:Repository<Course>){
 
     }
 
-  create(payload: any) {
-    const newCourse=this.courseRepository.create(payload)
+  create(body: CreateCourseDto) {
+    const newCourse=this.courseRepository.create(body)
     return this.courseRepository.save(newCourse);
   }
 
@@ -27,9 +27,9 @@ export class CoursesService {
     return this.courseRepository.findOneBy({id});
   }
 
-  async update(id: number, payload: any) {
+  async update(id: number, body: CreateCourseDto) {
     const updCourses= await this.courseRepository.findOneBy({id});
-    this.courseRepository.merge(updCourses,payload)
+    this.courseRepository.merge(updCourses,body)
     return this.courseRepository.save(updCourses)
   }
 

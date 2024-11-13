@@ -10,14 +10,14 @@ import { TypeOrmModule } from '@nestjs/typeorm';
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: 'localhost',
-      port: 3306,
+      port: 5500,
       username: 'root',
       password: '',
       database: 'bootcamps_2902093',
       entities: [],
       synchronize: true,
       autoLoadEntities:true,
-      dropSchema:true
+      //dropSchema:true
     }),   
     BootcampsModule, UsersModule, ReviewsModule, CoursesModule],
   controllers: [],

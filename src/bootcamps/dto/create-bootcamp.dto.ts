@@ -18,4 +18,5 @@ export class CreateBootcampDto {
     readonly averageRaiting:number;
 
     readonly createAt:Date;
+
 }

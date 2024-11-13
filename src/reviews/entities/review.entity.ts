@@ -16,6 +16,8 @@ export class Review {
     @Column({type:"int"})
     raiting:number
 
+    
+
     @ManyToOne(()=>Bootcamp,(Bootcamp)=>Bootcamp.review)
     bootcamp:Bootcamp
 

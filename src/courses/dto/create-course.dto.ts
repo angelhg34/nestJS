@@ -23,4 +23,8 @@ export class CreateCourseDto {
 
     readonly creatAt:Date;
 
+
+    @IsInt()
+    readonly bootcampId: number
+
 }

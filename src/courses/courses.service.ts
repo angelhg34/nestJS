@@ -3,20 +3,46 @@ import { CreateCourseDto } from './dto/create-course.dto';
 import { UpdateCourseDto } from './dto/update-course.dto';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Course } from './entities/course.entity';
+import { Course, minimumSkill } from './entities/course.entity';
+import { Bootcamp } from 'src/bootcamps/entities/bootcamp.entity';
 
 
 @Injectable()
 export class CoursesService {
 
   constructor(@InjectRepository(Course)   
-    private courseRepository:Repository<Course>){
+    private courseRepository:Repository<Course>,
+    @InjectRepository(Bootcamp)   
+    private bootcampRepository:Repository<Bootcamp>
+  ){
 
     }
 
-  create(body: CreateCourseDto) {
-    const newCourse=this.courseRepository.create(body)
-    return this.courseRepository.save(newCourse);
+  async create(body: CreateCourseDto) {
+    //1. desestructurar el dto
+    const{
+      title,
+      description,
+      weeks,
+      tuition,
+      minimum_skill,
+      bootcampId
+    }=body
+    //2. hallar el objeto bootcamp que tenga esa id
+    const bootcampById=await this.bootcampRepository.findOneBy({id:bootcampId})
+    //3. Crear una instancia de course
+    const newCourse= new Course()
+    newCourse.title=title
+    newCourse.description=description
+    newCourse.weeks= weeks
+    newCourse.tuition=tuition
+    newCourse.minimum_skill=minimum_skill
+
+    newCourse.bootcamp= bootcampById
+
+    return this.courseRepository.save(newCourse)
+    // const newCourse=this.courseRepository.create(body)
+    // return this.courseRepository.save(newCourse);
   }
 
   findAll() {

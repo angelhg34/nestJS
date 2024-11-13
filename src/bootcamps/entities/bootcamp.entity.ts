@@ -13,6 +13,7 @@ export class Bootcamp {
     @Column('varchar', {length:20})
     name:string
 
+    
     @Column('int')
     phone:number
 
